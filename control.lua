@@ -69,8 +69,8 @@ function destroy_gui(player)
 end
 
 function reset_gui_location(player)
-  local x = settings.get_player_settings(player)["ptplus-x"].value
-  local y = settings.get_player_settings(player)["ptplus-y"].value
+  local x = settings.get_player_settings(player)["game-time-display-x"].value
+  local y = settings.get_player_settings(player)["game-time-display-y"].value
   set_gui_location(player, x, y)
   set_gui_location(player, x, y) -- Call twice to override location buffering
 end
@@ -203,7 +203,7 @@ local function on_player_display_resolution_changed(event)
 end
 
 local function on_runtime_mod_setting_changed(event)
-  if event.setting == "ptplus-x" or event.setting == "ptplus-y" then
+  if event.setting == "game-time-display-x" or event.setting == "game-time-display-y" then
     local player = game.players[event.player_index]
     reset_gui_location(player)
   end
