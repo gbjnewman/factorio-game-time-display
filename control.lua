@@ -15,10 +15,28 @@ function update_timer(player)
 end
 
 function create_gui(player)
-  local frame = player.gui.screen.add{type="frame", name=GUI_FRAME_NAME}
-  frame.style.padding = {0, 6, 0, 6}
-  local label = frame.add{type="label", name=GUI_LABEL_NAME}
-  label.drag_target = frame
+    -- Remove any existing timer frame before creating another one.
+    -- This prevents duplicate GUI name errors during initialization.
+    local existing_frame = player.gui.screen[GUI_FRAME_NAME]
+
+    if existing_frame then
+        existing_frame.destroy()
+    end
+
+    -- Create the timer frame and its label.
+    local frame = player.gui.screen.add{
+        type = "frame",
+        name = GUI_FRAME_NAME
+    }
+
+    frame.style.padding = {0, 6, 0, 6}
+
+    local label = frame.add{
+        type = "label",
+        name = GUI_LABEL_NAME
+    }
+
+    label.drag_target = frame
 end
 
 function init_gui(player)
