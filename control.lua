@@ -40,10 +40,26 @@ function create_gui(player)
 end
 
 function init_gui(player)
-  storage.ptplus[player.name] = storage.ptplus[player.name] or {}
-  create_gui(player)
-  reset_gui_location(player)
-  update_timer(player)
+    -- Keep existing player state if it is available.
+    local player_state = storage.ptplus[player.name] or {}
+    storage.ptplus[player.name] = player_state
+
+    -- Remember the previously saved clock position.
+    local saved_location = player_state.loc2
+
+    -- Create the clock GUI.
+    create_gui(player)
+
+    if saved_location then
+        -- Restore the player's previous position.
+        set_gui_location(player, saved_location.x, saved_location.y)
+        set_gui_location(player, saved_location.x, saved_location.y)
+    else
+        -- New players start at their configured position.
+        reset_gui_location(player)
+    end
+
+    update_timer(player)
 end
 
 function destroy_gui(player)
