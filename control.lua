@@ -40,7 +40,7 @@ function create_gui(player)
 end
 
 function init_gui(player)
-  storage.ptplus[player.name] = {}
+  storage.ptplus[player.name] = storage.ptplus[player.name] or {}
   create_gui(player)
   reset_gui_location(player)
   update_timer(player)
