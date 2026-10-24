@@ -137,11 +137,29 @@ local function on_nth_tick_hour()
 end
 
 local function on_configuration_changed(event)
-  storage.ptplus = {}
-  for _, player in pairs(game.players) do
-    destroy_gui(player)
-    init_gui(player)
-  end
+    -- Keep existing player state where possible.
+    storage.ptplus = storage.ptplus or {}
+
+    for _, player in pairs(game.players) do
+        -- Remember the clock position before rebuilding it.
+        local old_frame = player.gui.screen[GUI_FRAME_NAME]
+        local old_location = nil
+
+        if old_frame then
+            old_location = {
+                x = old_frame.location.x,
+                y = old_frame.location.y
+            }
+        end
+
+        -- Recreate the clock safely.
+        init_gui(player)
+
+        -- Restore its previous position.
+        if old_location then
+            set_gui_location(player, old_location.x, old_location.y)
+        end
+    end
 end
 
 local function on_player_created(event)
