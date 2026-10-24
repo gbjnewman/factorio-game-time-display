@@ -1,11 +1,9 @@
 {
-    "name": "playtime-plus",
-    "version": "1.0.6",
-    "title": "Playtime+",
-    "author": "Mazmot",
-    "contact": "Private",
-    "homepage": "",
-    "description": "Adds a simple clock showing how long the current game has been running.",
-    "dependencies": ["base >= 2.0.0"],
-    "factorio_version": "2.0"
+    "name": "factorio-game-time-display",
+    "version": "0.1.0",
+    "title": "Game Time Display",
+    "author": "Pybren",
+    "description": "Displays the elapsed in-game time in a movable on-screen clock.",
+    "dependencies": ["base >= 2.1.2"],
+    "factorio_version": "2.1"
 }
