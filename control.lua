@@ -210,7 +210,14 @@ local function on_runtime_mod_setting_changed(event)
 end
 
 script.on_init(function()
-  storage.ptplus = {}
+    -- Initialize persistent state for this mod.
+    storage.ptplus = {}
+
+    -- Create clocks for players already present in the save.
+    -- In a new game, on_player_created also handles new players.
+    for _, player in pairs(game.players) do
+        init_gui(player)
+    end
 end)
 
 script.on_nth_tick(60, on_nth_tick_60)
